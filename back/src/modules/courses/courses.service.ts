@@ -8,12 +8,12 @@ import { PrismaService } from 'src/database/prisma.service';
 export class CoursesService {
   constructor(private prisma: PrismaService){}
   
-  async create(createCourseDto: CreateCourseDto, teacherId: number) {
+  async create(createCourseDto: any, teacherId: number) {
     teacherId = Number(teacherId)
 
     const intenceCourse = new Course()
     Object.assign(intenceCourse, {...createCourseDto})
-    const course = await this.prisma.course.create({data: {...intenceCourse, teacherId}})
+    const course = await this.prisma.course.create({data: {...createCourseDto, teacherId}})
     
     return course;
   }
@@ -47,7 +47,7 @@ export class CoursesService {
     return findCourse;
   }
 
-  async update(id: number, updateCourseDto: UpdateCourseDto, userId: number) {
+  async update(id: number, updateCourseDto: any, userId: number) {
     id = Number(id)
 
      const findCourse = await this.prisma.course.findUnique({

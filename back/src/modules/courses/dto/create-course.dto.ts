@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { IsNumber, IsString } from "class-validator";
+import { IsEnum, IsNumber, IsString } from "class-validator";
+import { CategoryCourse } from "../entities/course.entity";
 
 export interface Ivideos {
     title: string;
@@ -18,6 +19,10 @@ export class CreateCourseDto {
     @ApiProperty()
     @IsNumber()
     duration: number;
+
+    @ApiProperty()
+    @IsEnum(CategoryCourse)
+    category: CategoryCourse;
 
     @ApiProperty()
     teacherId?: number;

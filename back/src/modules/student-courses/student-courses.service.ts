@@ -63,6 +63,8 @@ export class StudentCoursesService {
         }
       }
     })
+
+    if(!student) throw new NotFoundException("not found")
     
     if(student.studentId != studentId) throw new UnauthorizedException("not autorization")
 
