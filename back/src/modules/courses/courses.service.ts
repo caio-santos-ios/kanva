@@ -18,8 +18,24 @@ export class CoursesService {
     return course;
   }
 
-  async findAll() {
-    const courses = await this.prisma.course.findMany()
+  async findAll(name?: string) {
+    if (name) {
+      const courses = await this.prisma.course.findMany({
+        where: { name: { contains: name.toUpperCase() } },
+
+      });
+      return courses
+    }
+    const courses = await this.prisma.course.findMany({
+      include: {
+        teacher: {
+          select: {
+            id: true,
+            name: true
+          }
+        }
+      }
+    })
     return courses;
   }
 
@@ -56,7 +72,7 @@ export class CoursesService {
 
     if(!findCourse) throw new NotFoundException("course not found")
 
-    if(findCourse.teacherId == userId) throw new UnauthorizedException("not autorization")
+    // if(findCourse.teacherId == userId) throw new UnauthorizedException("not autorization")
 
     const course = await this.prisma.course.update({
       where: { id },

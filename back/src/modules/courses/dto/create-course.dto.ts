@@ -21,6 +21,10 @@ export class CreateCourseDto {
     duration: number;
 
     @ApiProperty()
+    @IsString()
+    photo: string;
+
+    @ApiProperty()
     @IsEnum(CategoryCourse)
     category: CategoryCourse;
 

@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+import '../globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Cursos online',
-  description: 'Pagina inicial de cursos online',
+  title: 'Fazer login',
+  description: 'Pagina para se logar na plataforma.',
 }
 
-export default function RootLayout({
+export default function LoginLayout({
   children,
 }: {
   children: React.ReactNode

@@ -10,11 +10,11 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 export class StudentCoursesController {
   constructor(private readonly studentCoursesService: StudentCoursesService) {}
 
-  @Post(':id')
+  @Post(':courseId')
   @ApiBearerAuth()
   @UseGuards(JWTAuthGuard)
-  create(@Body() createStudentCourseDto: CreateStudentCourseDto, @Param('id') id: number, @Request() req) {
-    return this.studentCoursesService.create(createStudentCourseDto, id, req.user.id);
+  create(@Body() createStudentCourseDto: CreateStudentCourseDto, @Param('courseId') courseId: number, @Request() req) {
+    return this.studentCoursesService.create(createStudentCourseDto, courseId, req.user.id);
   }
 
   @Get()

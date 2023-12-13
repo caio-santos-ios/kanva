@@ -30,6 +30,7 @@ model Course {
   description String
   category CategoryCourse @default(TI) 
   duration Int
+  photo String
   teacher Account @relation(fields: [teacherId], references: [id])
   teacherId Int
   studentCourse StudentCourse[]

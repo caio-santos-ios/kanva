@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateStudentCourseDto } from './dto/create-student-course.dto';
 import { UpdateStudentCourseDto } from './dto/update-student-course.dto';
 import { PrismaService } from 'src/database/prisma.service';
@@ -10,6 +10,13 @@ export class StudentCoursesService {
 
   async create(createStudentCourseDto: CreateStudentCourseDto, courseId: number, studentId: number) {
     studentId = Number(studentId)
+
+    const findStudent = await this.prisma.studentCourse.findFirst({
+      where: { studentId }
+    })
+
+    // if(findStudent) throw new ConflictException("student registred")
+   
     const intanseStudent = new StudentCourse()
     Object.assign(intanseStudent)
 
@@ -58,7 +65,8 @@ export class StudentCoursesService {
             id: true,
             name: true,
             description: true,
-            videoClasses: true
+            videoClasses: true,
+            duration: true
           }
         }
       }

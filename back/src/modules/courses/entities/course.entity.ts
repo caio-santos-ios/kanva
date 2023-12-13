@@ -12,6 +12,7 @@ export class Course {
     readonly id: number;
     name: string;
     description: string;
+    photo: string;
     category: CategoryCourse;
     duration: number;
     //videoClasses?: Ivideos[]
