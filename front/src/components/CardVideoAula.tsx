@@ -8,7 +8,7 @@ interface Iprops {
 
 export const CardVideoAula = ({title, video}: Iprops) => {
     return(
-        <Link className="flex items-center gap-1" href={video} about={`video ${video}`}>
+        <Link target="blank" className="flex items-center gap-1" href={video} about={`video ${video}`}>
             {title}
             <MdOutlineOndemandVideo />
         </Link>
