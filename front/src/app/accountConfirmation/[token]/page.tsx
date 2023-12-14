@@ -8,7 +8,7 @@ interface Iprops {
   params: {token: string}
 }
 
-export default async function accountConfirmationToken({params}: Iprops) {
+export default async function Token({params}: Iprops) {
   const router = useRouter()
 
   useEffect(() => {
