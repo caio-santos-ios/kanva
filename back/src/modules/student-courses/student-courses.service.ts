@@ -1,6 +1,5 @@
-import { ConflictException, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreateStudentCourseDto } from './dto/create-student-course.dto';
-import { UpdateStudentCourseDto } from './dto/update-student-course.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { StudentCourse } from './entities/student-course.entity';
 
@@ -11,7 +10,7 @@ export class StudentCoursesService {
   async create(createStudentCourseDto: CreateStudentCourseDto, courseId: number, studentId: number) {
     studentId = Number(studentId)
 
-    const findStudent = await this.prisma.studentCourse.findFirst({
+    const findStudent = await this.prisma.studentCourses.findFirst({
       where: { studentId }
     })
 
@@ -20,7 +19,7 @@ export class StudentCoursesService {
     const intanseStudent = new StudentCourse()
     Object.assign(intanseStudent)
 
-    const student = await this.prisma.studentCourse.create({
+    const student = await this.prisma.studentCourses.create({
       data: { courseId, studentId }
     })
     
@@ -28,7 +27,7 @@ export class StudentCoursesService {
   }
 
   async findAll(studentId: number) {
-    const students = await this.prisma.studentCourse.findMany({
+    const students = await this.prisma.studentCourses.findMany({
       include: {
         course: {
           select: {
@@ -57,7 +56,7 @@ export class StudentCoursesService {
   }
 
   async findOne(id: number, studentId: number) {
-    const student = await this.prisma.studentCourse.findUnique({
+    const student = await this.prisma.studentCourses.findUnique({
       where: {id},
       include: {
         course: {
@@ -80,7 +79,7 @@ export class StudentCoursesService {
   }
 
   async remove(id: number, studentId: number) {
-    const findStudent = await this.prisma.studentCourse.findUnique({
+    const findStudent = await this.prisma.studentCourses.findUnique({
       where: { id }
     })
   
@@ -88,7 +87,7 @@ export class StudentCoursesService {
 
     if(findStudent.studentId != studentId) throw new UnauthorizedException("not autorization")
 
-    await this.prisma.studentCourse.delete({
+    await this.prisma.studentCourses.delete({
       where: { id }
     })
 
