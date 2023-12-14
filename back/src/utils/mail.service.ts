@@ -8,7 +8,7 @@ var mailGenerator = new Mailgen({
     product: {
         // Appears in header & footer of e-mails
         name: 'Kanva',
-        link: 'http://localhost:3000/courses'
+        link: 'https://kanva.vercel.app/'
         // Optional product logo
         // logo: 'https://mailgen.js/img/logo.png'
     }
