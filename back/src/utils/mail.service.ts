@@ -38,7 +38,7 @@ export class MailServiice{
                     button: {
                         color: '#22BC66',
                         text: 'Confirmar conta',
-                        link: `http://localhost:3001/accountConfirmation/${accountToken}`
+                        link: `https://kanva.vercel.app/accountConfirmation/${accountToken}`
                     }
                 },
                 outro: 'Necessita de ajuda ou tem dúvidas? Basta responder a este e-mail. Teremos todo o gosto em ajudar. Sinceramente, Kanva'
