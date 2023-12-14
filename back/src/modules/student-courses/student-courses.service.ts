@@ -10,7 +10,7 @@ export class StudentCoursesService {
   async create(createStudentCourseDto: CreateStudentCourseDto, courseId: number, studentId: number) {
     studentId = Number(studentId)
 
-    const findStudent = await this.prisma.studentCourses.findFirst({
+    const findStudent = await this.prisma.studentCourse.findFirst({
       where: { studentId }
     })
 
@@ -19,7 +19,7 @@ export class StudentCoursesService {
     const intanseStudent = new StudentCourse()
     Object.assign(intanseStudent)
 
-    const student = await this.prisma.studentCourses.create({
+    const student = await this.prisma.studentCourse.create({
       data: { courseId, studentId }
     })
     
@@ -27,7 +27,7 @@ export class StudentCoursesService {
   }
 
   async findAll(studentId: number) {
-    const students = await this.prisma.studentCourses.findMany({
+    const students = await this.prisma.studentCourse.findMany({
       include: {
         course: {
           select: {
@@ -56,7 +56,7 @@ export class StudentCoursesService {
   }
 
   async findOne(id: number, studentId: number) {
-    const student = await this.prisma.studentCourses.findUnique({
+    const student = await this.prisma.studentCourse.findUnique({
       where: {id},
       include: {
         course: {
@@ -79,7 +79,7 @@ export class StudentCoursesService {
   }
 
   async remove(id: number, studentId: number) {
-    const findStudent = await this.prisma.studentCourses.findUnique({
+    const findStudent = await this.prisma.studentCourse.findUnique({
       where: { id }
     })
   
@@ -87,7 +87,7 @@ export class StudentCoursesService {
 
     if(findStudent.studentId != studentId) throw new UnauthorizedException("not autorization")
 
-    await this.prisma.studentCourses.delete({
+    await this.prisma.studentCourse.delete({
       where: { id }
     })
 
