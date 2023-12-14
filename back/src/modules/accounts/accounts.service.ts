@@ -16,8 +16,10 @@ export class AccountsService {
       where: { email: createAccountDto.email }
     })
 
-    if(findUser) throw new ConflictException("email invalited")
-
+    if(findUser) {
+      throw new ConflictException("email invalited")
+    }
+    
     const token = randomUUID()
 
     const instanceUser = new Account(token)

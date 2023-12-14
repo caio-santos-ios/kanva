@@ -1,15 +1,11 @@
 import { Header } from "@/components/Header";
 import { ListCourse } from "@/components/ListCourse";
 import Carousel from "@/components/Carousel";
-import { VerifyLogged } from "@/components/VerifyLogged";
-import { cookies } from "next/headers"
-import { getCookie } from "cookies-next"
 
-//export const dynamic = "force-dynamic"
+export const dynamic = "force-dynamic"
 
 export default async function Home() {
 
-  //const account = VerifyLogged()  
   return (
     <>
       <Header />
