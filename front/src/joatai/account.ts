@@ -1,3 +1,5 @@
+"use client"
+
 import { atom } from "jotai";
 import { getCookie } from "cookies-next" 
 

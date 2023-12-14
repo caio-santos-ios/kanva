@@ -24,7 +24,7 @@ export class MailServiice{
             subject,
             html: text 
         })
-        .then(() => console.log("Email enviado com sucesso"))
+        .then()
         .catch((err) => console.log(err))
 
     }
