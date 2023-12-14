@@ -4,10 +4,12 @@ import { UpdateAccountDto } from './dto/update-account.dto';
 import { PrismaService } from 'src/database/prisma.service';
 import { Account } from './entities/account.entity';
 import { plainToInstance } from 'class-transformer';
+import { randomUUID } from 'crypto';
+import { MailServiice } from 'src/utils/mail.service';
 
 @Injectable()
 export class AccountsService {
-  constructor(private prisma: PrismaService){}
+  constructor(private prisma: PrismaService, private mailService: MailServiice){}
 
   async create(createAccountDto: CreateAccountDto) {
     const findUser = await this.prisma.account.findUnique({
@@ -16,13 +18,36 @@ export class AccountsService {
 
     if(findUser) throw new ConflictException("email invalited")
 
-    const instanceUser = new Account()
+    const token = randomUUID()
 
+    const instanceUser = new Account(token)
+
+    const conf = this.mailService.templateConfirmationAccount(createAccountDto.email, createAccountDto.name, token)
+    
+    
     Object.assign(instanceUser, {...createAccountDto})
-
-    const user = await this.prisma.account.create({data: {...createAccountDto}})
-
+    
+    const user = await this.prisma.account.create({data: {...createAccountDto, token}})
+    
+    await this.mailService.sendEmail(conf)
+    
     return plainToInstance(Account, user);
+  }
+
+  async validateAccount(token: string){
+    
+    const findUser = await this.prisma.account.findFirst({
+      where: { token }
+    })
+
+    if(!findUser) throw new ConflictException("Expiration email")
+
+    await this.prisma.account.update({
+      where: { id: findUser.id },
+      data: { isValidated: true, token: "" }
+    })
+
+    return "Conta confirmada"
   }
 
   async findAll() {

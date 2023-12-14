@@ -15,14 +15,13 @@ export const FormRegister = () => {
     const { register, handleSubmit, reset } = useForm<Tregister>()
 
     const registion = async (data: Tregister) => {
+
         setLoading(true)
         try {
             await api.post("/accounts", data)
+            router.push("/accountConfirmation")
             reset()
-            toast.success("Conta criada")
-            router.push("/login")
         } catch (error: any) {
-
             setLoading(false)
             if(error.response.code == 409) console.log("Email inválido")
         }

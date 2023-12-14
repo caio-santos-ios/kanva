@@ -21,6 +21,13 @@ export class CreateAccountDto {
         groups: ['hashPassword']
     })
     password: string;
+
+    @ApiProperty()
+    token: string
+
+    @ApiProperty()
+    @IsBoolean()
+    isValidated: boolean = false;
     
     @ApiProperty()
     student?: boolean;

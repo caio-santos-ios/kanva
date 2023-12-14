@@ -15,6 +15,8 @@ model Account {
   name String
   email String @unique
   password String
+  token String
+  isValidated Boolean @default(false)
   student Boolean @default(true)
   teacher Boolean @default(false)
   courses Course[]

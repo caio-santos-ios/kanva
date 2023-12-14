@@ -16,6 +16,11 @@ export class AccountsController {
     return this.accountsService.create(createAccountDto);
   }
 
+  @Patch(':token')
+  validateAccount(@Param('token') token: string){
+    return this.accountsService.validateAccount(token)
+  }
+
   @Get()
   findAll() {
     return this.accountsService.findAll();
