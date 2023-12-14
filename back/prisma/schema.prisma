@@ -20,7 +20,7 @@ model Account {
   student Boolean @default(true)
   teacher Boolean @default(false)
   courses Course[]
-  studentCourse StudentCourse[]
+  studentCourse StudentCourses[]
 
   @@map("accounts")
 }
@@ -35,7 +35,7 @@ model Course {
   photo String
   teacher Account @relation(fields: [teacherId], references: [id])
   teacherId Int
-  studentCourse StudentCourse[]
+  studentCourse StudentCourses[]
   videoClasses Json[]
 
   @@map("courses")
@@ -45,7 +45,7 @@ enum CategoryCourse {
   TI
 }
 
-model StudentCourse {
+model StudentCourses {
   id Int @default(autoincrement()) @id
   active Boolean @default(true)
   studentId Int
