@@ -24,7 +24,7 @@ export const ListCourse = () => {
         }
         req()
     }, [])
-    console.log(loading)
+
     return(
         <>     
             <ul className="grid justify-items-center md:justify-start grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-2">

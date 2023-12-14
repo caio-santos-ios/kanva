@@ -36,12 +36,9 @@ export class AccountsService {
   }
 
   async validateAccount(token: string){
-    
     const findUser = await this.prisma.account.findFirst({
       where: { token }
     })
-
-    if(!findUser) throw new ConflictException("Expiration email")
 
     await this.prisma.account.update({
       where: { id: findUser.id },

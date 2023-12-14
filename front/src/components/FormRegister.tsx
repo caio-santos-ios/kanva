@@ -2,6 +2,7 @@
 
 import { Tregister } from "@/@types/auth"
 import { api } from "@/service/api"
+import { setCookie } from "cookies-next"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -17,8 +18,9 @@ export const FormRegister = () => {
     const registion = async (data: Tregister) => {
         setLoading(true)
         try {
-            await api.post("/accounts", data)
+            const res = await api.post("/accounts", data)
             router.push("/accountConfirmation")
+            setCookie("confirmation", res.data.token)
             reset()
         } catch (error: any) {
             console.log(error.response.status)

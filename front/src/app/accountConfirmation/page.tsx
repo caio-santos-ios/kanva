@@ -1,6 +1,16 @@
+import { getCookie } from "cookies-next";
 import Link from "next/link";
+import { cookies } from "next/headers"
+import { redirect } from "next/navigation";
+
+export const dynamic = "force-dynamic"
 
 export default async function accountConfirmation() {
+  const confirmation = getCookie("confirmation", { cookies })
+  if(!confirmation){
+    redirect('/register')
+  }
+
   return (
     <>
       <main className="body">
