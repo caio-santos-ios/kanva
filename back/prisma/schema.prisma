@@ -25,7 +25,6 @@ model Account {
   @@map("accounts")
 }
 
-
 model Course {
   id Int @default(autoincrement()) @id
   name String
