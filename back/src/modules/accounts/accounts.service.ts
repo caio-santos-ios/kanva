@@ -24,8 +24,7 @@ export class AccountsService {
 
     const conf = this.mailService.templateConfirmationAccount(createAccountDto.email, createAccountDto.name, token)
     
-    
-    Object.assign(instanceUser, {...createAccountDto})
+    Object.assign(instanceUser, {...createAccountDto, token})
     
     const user = await this.prisma.account.create({data: {...createAccountDto, token}})
     
@@ -44,7 +43,7 @@ export class AccountsService {
 
     await this.prisma.account.update({
       where: { id: findUser.id },
-      data: { isValidated: true, token: "" }
+      data: { isValidated: true, token: "" } 
     })
 
     return "Conta confirmada"
